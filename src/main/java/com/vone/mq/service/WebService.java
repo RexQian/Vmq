@@ -53,7 +53,10 @@ public class WebService {
         double reallyPrice = priceD;
 
         int row = 0;
+        //最多处理10次
+        int maxLoopCount = 10;
         while (row == 0){
+            maxLoopCount--;
             try {
                 row = tmpPriceDao.checkPrice(type+"-"+reallyPrice);
             }catch (Exception e){
@@ -71,7 +74,7 @@ public class WebService {
             }else{
                 break;
             }
-            if (reallyPrice<=0){
+            if (reallyPrice<=0 || maxLoopCount < 0){
                 return ResUtil.error("所有金额均被占用");
             }
         }
