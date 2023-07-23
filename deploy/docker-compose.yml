@@ -1,0 +1,13 @@
+version: '2'
+services:
+  vmq:
+    environment:
+      - TZ=Asia/Shanghai
+    image: openjdk:11.0-jdk
+    working_dir: /app
+    command: java -jar ROOT.war
+    volumes:
+      - ./data:/root/data
+      - ./mq-0.0.1-SNAPSHOT.war:/app/ROOT.war
+    ports:
+      - "8080:8080"
